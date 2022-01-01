@@ -16,7 +16,7 @@ export const App = () => {
     if (todoText === "") return;
     const newTodos = [...incompleteTodos, todoText];
     setIncompleteTodos(newTodos);
-    setTodoText("削除");
+    setTodoText("");
   };
 
   const onClickDelete = (index) => {
@@ -48,8 +48,15 @@ export const App = () => {
       <InputTodo 
         todoText={todoText} 
         onChange={onChangeTodoText} 
-        onClick={onClickAdd} 
+        onClick={onClickAdd}
+        disabled = {incompleteTodos.length >= 5}
       />
+      {incompleteTodos.length >= 5 && ( 
+      <p style={{ color: 'red' }}>
+        登録できるtodo5個までです！
+      </p> 
+      )}
+      
       <IncompleteTodos 
         todos={incompleteTodos} 
         onClickComplete={onClickComplete} 
